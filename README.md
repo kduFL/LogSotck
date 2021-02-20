@@ -1,1 +1,1 @@
-# logCost
+# logStock
