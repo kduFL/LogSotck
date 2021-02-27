@@ -1,4 +1,4 @@
-// package app;
+package app;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -7,22 +7,21 @@ public class App {
 
 		public static void createAccount(Scanner input) {
 			System.out.println("\n\nCriar sua conta\n");
-			System.out.println("Você é: \n  1. Funcionário\n  2. Gerente de Estoque\n  3. Auxiliar de Estoque");
+			System.out.println("Você é: \n  1. Gerente de Estoque\n  2. Auxiliar de Estoque");
 			int job = input.nextInt();
 
 			if(job == 1) {
-				registerEmployee(input);
+				Manager manager = new Manager();
+
+				registerEmployee(input, manager);
 			} else if( job == 2) {
-				System.out.println("Gerente");
-			} else if(job == 3) {
+				// a função recebe objeto assistente
 				System.out.println("Assistente");
 			}
 		}
 
-		public static void registerEmployee(Scanner input) {
-				Employee employee = new Employee();
-				
-				System.out.println("\n\n===== Cadastro de Funcionário =====");
+		public static void registerEmployee(Scanner input, Employee employee) {
+				System.out.println("\n\n===== Cadastro =====");
 				
 				System.out.println("\nDigite seu nome: ");
 				employee.setName(input.next());
@@ -39,7 +38,6 @@ public class App {
 				System.out.println("\nCadastro realizado com sucesso!\n\n");
 
 				System.out.println(employee.getName() + " " + employee.getId() + " "+ employee.getPosition());
-
 		}
 
 		public static int createID() {
