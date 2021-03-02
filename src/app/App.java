@@ -5,6 +5,18 @@ import java.util.Scanner;
 
 public class App {
 
+		public static void start(Scanner input){
+			System.out.println("\n1. Entrar\n2. Criar nova conta");
+			int number = input.nextInt();
+
+			if(number == 1) {
+				System.out.println("Logado");
+			} else if( number == 2) {
+				createAccount(input);
+				start(input);
+			}
+		}
+
 		public static void createAccount(Scanner input) {
 			System.out.println("\n\nCriar sua conta\n");
 			System.out.println("Você é: \n  1. Gerente de Estoque\n  2. Auxiliar de Estoque");
@@ -37,7 +49,9 @@ public class App {
 
 				System.out.println("\nCadastro realizado com sucesso!\n\n");
 
-				System.out.println(employee.getName() + " " + employee.getId() + " "+ employee.getPosition());
+				System.out.println("\nVocê será redirecionado para tela inicial.\n");
+
+				// System.out.println(employee.getName() + " " + employee.getId() + " "+ employee.getPosition());
 		}
 
 		public static int createID() {
@@ -49,16 +63,8 @@ public class App {
     public static void main(String[] args) throws Exception {
 			Scanner input = new Scanner(System.in);
 			
-			System.out.println("========== LogStock ==========\n");
+			System.out.println("\n========== LogStock ==========");
 
-			
-			System.out.println("1. Entrar\n2. Criar nova conta");
-			int number = input.nextInt();
-
-			if(number == 1) {
-				System.out.println("Logado");
-			} else if( number == 2) {
-				createAccount(input);
-			}
+			start(input);
     }
 }
