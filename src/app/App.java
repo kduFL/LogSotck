@@ -10,10 +10,29 @@ public class App {
 			int number = input.nextInt();
 
 			if(number == 1) {
-				System.out.println("Logado");
+				login(input);
 			} else if( number == 2) {
 				createAccount(input);
 				start(input);
+			}
+		}
+
+		public static void login(Scanner input) {
+			int login = 123;
+			String pass = "123";
+
+			System.out.print("ID: ");
+			int id = input.nextInt();
+
+			System.out.print("Senha: ");
+			String password = input.next();
+			
+
+			if ((id == login) && (password.equals(pass))) {
+				System.out.print("Logado");
+			} else {
+				System.out.println("Senha errada!");
+				login(input);
 			}
 		}
 
