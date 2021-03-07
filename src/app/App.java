@@ -1,4 +1,4 @@
-package app;
+// package app;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -44,21 +44,21 @@ public class App {
 			if(job == 1) {
 				Manager manager = new Manager();
 
-				registerEmployee(input, manager);
+				registerEmployee(input, manager, job);
 			} else if( job == 2) {
-				// a função recebe objeto assistente
 				System.out.println("Assistente");
 			}
 		}
 
-		public static void registerEmployee(Scanner input, Employee employee) {
+		public static void registerEmployee(Scanner input, Employee employee, int job) {
+				input.nextLine(); //Esvazia buffer do teclado para usar o nextLine nas próximos inputs
+
 				System.out.println("\n\n===== Cadastro =====");
 				
 				System.out.println("\nDigite seu nome: ");
-				employee.setName(input.next());
+				employee.setName(input.nextLine());
 				
-				System.out.println("\nDigite seu cargo: ");
-				employee.setPosition(input.next());
+				employee.setPosition(job);
 				
 				int id = createID();
 
