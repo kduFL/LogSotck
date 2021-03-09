@@ -1,69 +1,65 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Stock {
-    private int id;
-    private String brand;
-    private int quantity;
-    private String validity;
-    private String description;
-    private String estado;
 
-    public Stock() {
+    ArrayList<Item> stock = new ArrayList<Item>();
+
+    public void stock() {
+        
+        getItems();
+
     }
 
-    public Stock(int id, String brand, int quantity, String validity, String description, String estado) {
-        this.id = id;
-        this.brand = brand;
-        this.quantity = quantity;
-        this.validity = validity;
-        this.description = description;
-        this.estado = estado;
+    public void addItem(Scanner input) {
+        Item item = new Item();
+        
+        System.out.print("ID: ");
+        int id = input.nextInt();
+
+        System.out.print("Marca: ");
+        String brand = input.next();
+
+        System.out.print("Quantidade: ");
+        int quantity = input.nextInt();
+
+        System.out.print("Data de Validade: ");
+        String validity = input.next();
+
+        System.out.print("Descrição: ");
+        String description = input.next();
+
+        System.out.print("Estado: ");
+        String estado = input.next();
+
+        item.createItem(id, brand, quantity, validity, description, estado);
+        stock.add(item);
     }
 
-    public int getId() {
-        return id;
+    public void getItems() {
+        System.out.println("");
+        for (int i = 0; i < stock.size(); i++) {
+            int id = stock.get(i).getId();
+            String marca = stock.get(i).getBrand();
+            int quantity = stock.get(i).getQuantity();
+            String validity = stock.get(i).getValidity();
+            String description = stock.get(i).getDescription();
+            String estado = stock.get(i).getEstado();
+
+            System.out.println("ID: " +id + " | Marca: " + marca + " | Quantidade: " + quantity + "x | Validade: " + validity + " | Descrição: " + description + " | Estado: " + estado + "\n");
+        }
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void removeItem(Scanner input){
+        System.out.print("\nID: ");
+        int index = input.nextInt();
 
-    public String getBrand() {
-        return brand;
-    }
+        for (int i = 0; i < stock.size(); i++) {
+            int id = stock.get(i).getId();
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+            if (id == index) {
+                stock.remove(i);
+            }
+        }
     }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getValidity() {
-        return validity;
-    }
-
-    public void setValidity(String validity) {
-        this.validity = validity;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 }
