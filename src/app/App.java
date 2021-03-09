@@ -2,11 +2,15 @@
 
 import org.json.JSONObject;
 
+import java.util.InputMismatchException;
+import java.io.IOException;
+
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
@@ -48,14 +52,22 @@ public class App {
 		public static void createAccount(Scanner input) {
 			System.out.println("\n\nCriar sua conta\n");
 			System.out.println("Você é: \n  1. Gerente de Estoque\n  2. Auxiliar de Estoque");
-			int job = input.nextInt();
-
-			if(job == 1) {
-				Manager manager = new Manager();
-
-				registerEmployee(input, manager, job);
-			} else if( job == 2) {
-				System.out.println("Assistente");
+			
+			try {	
+				int job = input.nextInt();
+				
+				if(job == 1) {
+					Manager manager = new Manager();
+					
+					registerEmployee(input, manager, job);
+				} else if( job == 2) {
+					System.out.println("Assistente");
+				} else {
+					System.out.println("\nOps... Você digitu o número errado. Digite apenas 1. Gerente ou 2. Assistente.\n");
+				}
+			} catch (InputMismatchException err) {
+				System.out.println("\nOps... Você digitou um caractere. Digite apenas 1. Gerente ou 2. Assistente.");
+				input.nextLine(); //Esvazia buffer do input
 			}
 		}
 
