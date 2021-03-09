@@ -133,7 +133,7 @@ public class App {
 				
 				FileWriter file = new FileWriter("userData.json");
 
-				file.write(userData.toString());
+				file.write(userData.toString(2));
 				file.close();
 
 			} catch(IOException e) {
