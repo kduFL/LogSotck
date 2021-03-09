@@ -11,6 +11,14 @@ public class App {
 
 			if(number == 1) {
 				login(input);
+
+				//Stock stock = new Stock();
+				
+				//stock.addItem(input);
+				//stock.getItems();
+
+				//stock.removeItem(input);
+				//stock.getItems();
 			} else if( number == 2) {
 				createAccount(input);
 				start(input);
