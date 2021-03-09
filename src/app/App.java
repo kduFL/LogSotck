@@ -1,5 +1,14 @@
 // package app;
 
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -64,19 +73,60 @@ public class App {
 
 				employee.setId(id);
 
+				saveDate(employee);
+
 				System.out.println("\n\nSeu ID para entrar na plataforma: " + employee.getId());
 
 				System.out.println("\nCadastro realizado com sucesso!\n\n");
 
 				System.out.println("\nVocê será redirecionado para tela inicial.\n");
-
-				// System.out.println(employee.getName() + " " + employee.getId() + " "+ employee.getPosition());
 		}
 
 		public static int createID() {
 			Random rand = new Random();
 
 			return rand.nextInt(10000);
+		}
+
+		public static void saveDate(Employee employee) {
+			File dataFile = new File("userData.json"); 
+
+			if(dataFile.exists()) {
+				try {
+					String jsonFile = new String(Files.readAllBytes(Paths.get("userData.json")));
+
+					JSONObject userData = new JSONObject(jsonFile);
+
+					addDataToFile(userData, employee);
+
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				JSONObject userData = new JSONObject();
+
+				addDataToFile(userData, employee);
+			}
+		}
+
+		public static void addDataToFile(JSONObject userData, Employee employee) {
+		
+			try {
+				Map data = new LinkedHashMap<>(2);
+				
+				data.put("nome", employee.getName());
+				data.put("cargo", employee.getPosition());
+
+				userData.put(Integer.toString(employee.getId()), data);
+				
+				FileWriter file = new FileWriter("userData.json");
+
+				file.write(userData.toString());
+				file.close();
+
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 
     public static void main(String[] args) throws Exception {
