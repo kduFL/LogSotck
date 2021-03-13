@@ -2,12 +2,12 @@
 
 public abstract class Employee {
   private String name;
-  private String position;
+  private int position;
   private int id;
 
   public Employee() {}
 
-  public Employee(String name, String position, int id) {
+  public Employee(String name, int position, int id) {
     this.name = name;
     this.position = position;
     this.id = id;
@@ -21,11 +21,11 @@ public abstract class Employee {
     this.name = name;
   }
 
-  public String getPosition() {
+  public int getPosition() {
     return position;
   }
 
-  public void setPosition(String position) {
+  public void setPosition(int position) {
     this.position = position;
   }
 
