@@ -50,10 +50,32 @@ public class App {
 			
 
 			if ((id == login) && (password.equals(pass))) {
-				System.out.print("Logado");
+				menu(input);
 			} else {
 				System.out.println("Senha errada!");
 				login(input);
+			}
+		}
+
+		public static void menu(Scanner input){
+			Stock stock = new Stock();
+
+			while (true) {
+				stock.getItems();
+								
+				System.out.println("\n1. Adiconar");
+				System.out.println("2. Remover");
+
+				System.out.print("> ");
+				int option = input.nextInt();
+
+				if (option == 1) {
+					stock.addItem(input);
+				} else if (option == 2){
+					stock.removeItem(input);
+				} else {
+					System.out.println("Opção invalida!");
+				}
 			}
 		}
 
