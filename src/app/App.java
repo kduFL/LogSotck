@@ -20,28 +20,34 @@ import java.util.Scanner;
 public class App {
 
 		public static void start(Scanner input){
-			System.out.println("\n1. Entrar\n2. Criar nova conta\n0. Sair");
-			System.out.print("> ");
-			int number = input.nextInt();
-
-			if(number == 1) {
-				login(input);
-
-				//Stock stock = new Stock();
-				
-				//stock.addItem(input);
-				//stock.getItems();
-
-				//stock.removeItem(input);
-				//stock.getItems();
-			} else if( number == 2) {
-				createAccount(input);
-				start(input);
-			} else if( number == 0) {
-				System.out.println("\nSaindo...");
-				System.exit(0);
-			} else {
-				System.out.println("Opss... Número inválido. Tente novamente.\n");
+			try {
+				System.out.println("\n1. Entrar\n2. Criar nova conta\n0. Sair");
+				System.out.print("> ");
+				int number = input.nextInt();
+	
+				if(number == 1) {
+					login(input);
+	
+					//Stock stock = new Stock();
+					
+					//stock.addItem(input);
+					//stock.getItems();
+	
+					//stock.removeItem(input);
+					//stock.getItems();
+				} else if( number == 2) {
+					createAccount(input);
+					start(input);
+				} else if( number == 0) {
+					System.out.println("\nSaindo...");
+					System.exit(0);
+				} else {
+					System.out.println("Voê digitou um número inválido. Tente novamente.\n");
+					start(input);
+				}
+			} catch (InputMismatchException err) {
+				System.out.println("Opss... Você digitou caractere.\n");
+				input.nextLine(); //Limpa cache
 				start(input);
 			}
 		}
@@ -61,8 +67,6 @@ public class App {
 					String idString = Integer.toString(id);
 	
 					JSONObject idData = userData.getJSONObject(idString);
-	
-					System.out.println(idData.toString());
 					
 					menu(input);
 	
