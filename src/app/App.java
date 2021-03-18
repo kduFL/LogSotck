@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class App {
 
 		public static void start(Scanner input){
-			System.out.println("\n1. Entrar\n2. Criar nova conta");
+			System.out.println("\n1. Entrar\n2. Criar nova conta\n0. Sair");
 			System.out.print("> ");
 			int number = input.nextInt();
 
@@ -36,6 +36,12 @@ public class App {
 				//stock.getItems();
 			} else if( number == 2) {
 				createAccount(input);
+				start(input);
+			} else if( number == 0) {
+				System.out.println("\nSaindo...");
+				System.exit(0);
+			} else {
+				System.out.println("Opss... Número inválido. Tente novamente.\n");
 				start(input);
 			}
 		}
