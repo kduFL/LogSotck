@@ -1,5 +1,6 @@
 // package app;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.InputMismatchException;
@@ -19,42 +20,43 @@ import java.util.Scanner;
 public class App {
 
 		public static void start(Scanner input){
-			System.out.println("\n1. Entrar\n2. Criar nova conta");
-			int number = input.nextInt();
-
-			if(number == 1) {
-				login(input);
-
-				//Stock stock = new Stock();
-				
-				//stock.addItem(input);
-				//stock.getItems();
-
-				//stock.removeItem(input);
-				//stock.getItems();
-			} else if( number == 2) {
-				createAccount(input);
+			try {
+				System.out.println("\n1. Entrar\n2. Criar nova conta\n0. Sair");
+				System.out.print("> ");
+				int number = input.nextInt();
+	
+				if(number == 1) {
+					login(input);
+	
+					//Stock stock = new Stock();
+					
+					//stock.addItem(input);
+					//stock.getItems();
+	
+					//stock.removeItem(input);
+					//stock.getItems();
+				} else if( number == 2) {
+					createAccount(input);
+					start(input);
+				} else if( number == 0) {
+					System.out.println("\nSaindo...");
+					System.exit(0);
+				} else {
+					System.out.println("Voê digitou um número inválido. Tente novamente.\n");
+					start(input);
+				}
+			} catch (InputMismatchException err) {
+				System.out.println("Opss... Você digitou caractere.\n");
+				input.nextLine(); //Limpa cache
 				start(input);
 			}
 		}
 
 		public static void login(Scanner input) {
-			int login = 123;
-			String pass = "123";
-
-			System.out.print("ID: ");
+			System.out.print("\nID: ");
 			int id = input.nextInt();
 
-			System.out.print("Senha: ");
-			String password = input.next();
-			
-
-			if ((id == login) && (password.equals(pass))) {
-				menu(input);
-			} else {
-				System.out.println("Senha errada!");
-				login(input);
-			}
+			checkUserDataExists(input, id);
 		}
 
 		public static void menu(Scanner input){
@@ -171,6 +173,50 @@ public class App {
 			}
 		}
 
+		public static void checkUserDataExists(Scanner input, int id) {
+			File file = new File("userData.json"); 
+			
+			if(file.exists()) {
+				getUserData(input, id);
+			} else {
+				System.out.println("\nOpss... Não temos nenhum usuário cadastrado no LogStock. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
+				start(input);
+			}
+		}
+
+		public static void getUserData(Scanner input, int id) {
+			try {
+				String data = new String(Files.readAllBytes(Paths.get("userData.json")));
+
+				JSONObject userData = new JSONObject(data);
+
+				String idString = Integer.toString(id);
+
+				JSONObject idData = userData.getJSONObject(idString);
+				
+				showUser(idData);
+
+				menu(input);
+
+			} catch (IOException err) {
+				err.printStackTrace();
+			} catch (JSONException err) {
+				System.out.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
+				start(input);
+			}
+		}
+
+		public static void showUser(JSONObject idData) {
+			System.out.print("\n\nUsuário: " + idData.getString("nome") + "\n");
+			int position = idData.getInt("cargo");
+
+			if(position == 1) {
+				System.out.println("Cargo: Gerente de Estoque");
+			} else {
+				System.out.println("Cargo: Auxiliar de Estoque");
+			}
+
+		}
     public static void main(String[] args) throws Exception {
 			Scanner input = new Scanner(System.in);
 			
