@@ -194,6 +194,8 @@ public class App {
 
 				JSONObject idData = userData.getJSONObject(idString);
 				
+				showUser(idData);
+
 				menu(input);
 
 			} catch (IOException err) {
@@ -202,6 +204,18 @@ public class App {
 				System.out.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
 				start(input);
 			}
+		}
+
+		public static void showUser(JSONObject idData) {
+			System.out.print("\n\nUsuário: " + idData.getString("nome") + "\n");
+			int position = idData.getInt("cargo");
+
+			if(position == 1) {
+				System.out.println("Cargo: Gerente de Estoque");
+			} else {
+				System.out.println("Cargo: Auxiliar de Estoque");
+			}
+
 		}
     public static void main(String[] args) throws Exception {
 			Scanner input = new Scanner(System.in);
