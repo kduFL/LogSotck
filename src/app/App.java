@@ -56,30 +56,7 @@ public class App {
 			System.out.print("\nID: ");
 			int id = input.nextInt();
 
-			File file = new File("userData.json"); 
-			
-			if(file.exists()) {
-				try {
-					String data = new String(Files.readAllBytes(Paths.get("userData.json")));
-	
-					JSONObject userData = new JSONObject(data);
-	
-					String idString = Integer.toString(id);
-	
-					JSONObject idData = userData.getJSONObject(idString);
-					
-					menu(input);
-	
-				} catch (IOException err) {
-					err.printStackTrace();
-				} catch (JSONException err) {
-					System.out.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
-					start(input);
-				}
-			} else {
-				System.out.println("\nOpss... Não temos nenhum usuário cadastrado no LogStock. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
-				start(input);
-			}
+			checkUserDataExists(input, id);
 		}
 
 		public static void menu(Scanner input){
@@ -196,6 +173,36 @@ public class App {
 			}
 		}
 
+		public static void checkUserDataExists(Scanner input, int id) {
+			File file = new File("userData.json"); 
+			
+			if(file.exists()) {
+				getUserData(input, id);
+			} else {
+				System.out.println("\nOpss... Não temos nenhum usuário cadastrado no LogStock. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
+				start(input);
+			}
+		}
+
+		public static void getUserData(Scanner input, int id) {
+			try {
+				String data = new String(Files.readAllBytes(Paths.get("userData.json")));
+
+				JSONObject userData = new JSONObject(data);
+
+				String idString = Integer.toString(id);
+
+				JSONObject idData = userData.getJSONObject(idString);
+				
+				menu(input);
+
+			} catch (IOException err) {
+				err.printStackTrace();
+			} catch (JSONException err) {
+				System.out.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
+				start(input);
+			}
+		}
     public static void main(String[] args) throws Exception {
 			Scanner input = new Scanner(System.in);
 			
