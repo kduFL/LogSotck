@@ -66,10 +66,14 @@ public class App {
 		while (true) {
 			teste.getItens();
 
-			System.out.print("\n1. Adicionar: ");
+			System.out.println("\n1. Adicionar");
+			System.out.println("2. Remover");
+			System.out.print("> ");
 			int i = input.nextInt();
 			if (i == 1) {
 				teste.addItem(input);
+			} else if (i == 2) {
+				teste.removeItem(input);
 			}
 		}
 	}
@@ -197,6 +201,7 @@ public class App {
 		} catch (JSONException err) {
 			System.out
 					.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
+			System.out.println(err);
 			start(input);
 		}
 	}

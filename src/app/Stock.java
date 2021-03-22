@@ -33,7 +33,17 @@ public class Stock {
     public void getItens() {
         int size = jsonList.length();
         for (int i = 0; i < size; i++) {
-            System.out.println(jsonList.getJSONObject(i));
+            JSONObject objeto = jsonList.getJSONObject(i);
+
+            String marca = objeto.getString("marca");
+            String estado = objeto.getString("estado");
+            String id = objeto.getString("id");
+            String quantidade = objeto.getString("quantidade");
+            String validade = objeto.getString("validade");
+            String descricao = objeto.getString("descricao");
+
+            System.out.println("ID: " + id + "  |  Marca: " + marca + "  |  Descrição: " + descricao
+                    + "  |  Quantidade: " + quantidade + "  |  Validade: " + validade + "  |  Estado: " + estado);
         }
     }
 
@@ -48,7 +58,7 @@ public class Stock {
         String brand = input.next();
 
         System.out.print("Quantidade: ");
-        int quantity = input.nextInt();
+        String quantity = input.next();
 
         System.out.print("Data de Validade: ");
         String validity = input.next();
@@ -59,7 +69,7 @@ public class Stock {
         System.out.print("Estado: ");
         String estado = input.next();
 
-        item.put("id", id);
+        item.put("id", String.valueOf(id));
         item.put("marca", brand);
         item.put("quantidade", quantity);
         item.put("validade", validity);
@@ -78,4 +88,23 @@ public class Stock {
 
     }
 
+    public void removeItem(Scanner input) {
+        System.out.print("\nID: ");
+        String id = input.next();
+
+        int size = jsonList.length();
+        Number index = null;
+        for (int i = 0; i < size; i++) {
+            JSONObject objeto = jsonList.getJSONObject(i);
+            String idData = objeto.getString("id");
+            System.out.println(idData);
+            if (id.equals(idData)) {
+                System.out.println("i: " + i);
+                index = i;
+            }
+        }
+        if (index != null) {
+            jsonList.remove(index.intValue());
+        }
+    }
 }
