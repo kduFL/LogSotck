@@ -18,6 +18,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
+	public static int position;
 
 	public static void start(Scanner input) {
 		try {
@@ -54,26 +55,35 @@ public class App {
 
 	public static void login(Scanner input) {
 		System.out.print("\nID: ");
-		int id = input.nextInt();
+		int userId = input.nextInt();
 
-		checkUserDataExists(input, id);
+		checkUserDataExists(input, userId);
 	}
 
 	public static void menu(Scanner input) {
-		Stock teste = new Stock();
-		teste.verificar();
+		Stock stock = new Stock();
+		stock.verificar();
 
 		while (true) {
-			teste.getItens();
+			stock.getItens();
 
-			System.out.println("\n1. Adicionar");
-			System.out.println("2. Remover");
-			System.out.print("> ");
-			int i = input.nextInt();
-			if (i == 1) {
-				teste.addItem(input);
-			} else if (i == 2) {
-				teste.removeItem(input);
+			if (position == 1) {
+				System.out.println("\n1. Adicionar");
+				System.out.println("2. Remover");
+				System.out.print("> ");
+				int i = input.nextInt();
+				if (i == 1) {
+					stock.addItem(input);
+				} else if (i == 2) {
+					stock.removeItem(input);
+				}
+			} else if (position == 2) {
+				System.out.println("1. Remover");
+				System.out.print("> ");
+				int i = input.nextInt();
+				if (i == 1) {
+					stock.removeItem(input);
+				}
 			}
 		}
 	}
@@ -207,13 +217,13 @@ public class App {
 	}
 
 	public static void showUser(JSONObject idData) {
-		System.out.print("\n\nUsuário: " + idData.getString("nome") + "\n");
-		int position = idData.getInt("cargo");
+		System.out.println("\n\nUsuário: " + idData.getString("nome"));
+		position = idData.getInt("cargo");
 
 		if (position == 1) {
-			System.out.println("Cargo: Gerente de Estoque");
+			System.out.println("Cargo: Gerente de Estoque\n");
 		} else {
-			System.out.println("Cargo: Auxiliar de Estoque");
+			System.out.println("Cargo: Auxiliar de Estoque\n");
 		}
 
 	}
