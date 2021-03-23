@@ -70,27 +70,35 @@ public class App {
 			if (position == 1) {
 				System.out.println("\n1. Adicionar");
 				System.out.println("2. Remover");
+				System.out.println("3. Sair");
 				System.out.print("> ");
 				int i = input.nextInt();
 				if (i == 1) {
 					stock.addItem(input);
 				} else if (i == 2) {
 					stock.removeItem(input);
+				} else if (i == 3) {
+					System.out.println("\nSaindo...");
+					System.exit(0);
 				}
 			} else if (position == 2) {
-				System.out.println("1. Remover");
+				System.out.println("\n1. Remover");
+				System.out.println("2. Sair");
 				System.out.print("> ");
 				int i = input.nextInt();
 				if (i == 1) {
 					stock.removeItem(input);
+				} else if (i == 2) {
+					System.out.println("\nSaindo...");
+					System.exit(0);
 				}
 			}
 		}
 	}
 
 	public static void createAccount(Scanner input) {
-		System.out.println("\n\nCriar sua conta\n");
-		System.out.println("Você é: \n  1. Gerente de Estoque\n  2. Auxiliar de Estoque");
+		System.out.println("\nCriar sua conta\n");
+		System.out.print("Você é: \n  1. Gerente de Estoque\n  2. Auxiliar de Estoque \n\n> ");
 
 		try {
 			int job = input.nextInt();
@@ -117,7 +125,7 @@ public class App {
 
 		System.out.println("\n\n===== Cadastro =====");
 
-		System.out.println("\nDigite seu nome: ");
+		System.out.print("\nDigite seu nome: ");
 		employee.setName(input.nextLine());
 
 		employee.setPosition(job);
@@ -128,11 +136,9 @@ public class App {
 
 		saveDate(employee);
 
-		System.out.println("\n\nSeu ID para entrar na plataforma: " + employee.getId());
+		System.out.println("\nCadastro realizado com sucesso!\n");
 
-		System.out.println("\nCadastro realizado com sucesso!\n\n");
-
-		System.out.println("\nVocê será redirecionado para tela inicial.\n");
+		System.out.println("\nGuarde seu ID para entrar na plataforma: " + employee.getId());
 	}
 
 	public static int createID() {
@@ -211,8 +217,7 @@ public class App {
 		} catch (IOException err) {
 			err.printStackTrace();
 		} catch (JSONException err) {
-			System.out
-					.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
+			System.out.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.");
 			start(input);
 		}
 	}

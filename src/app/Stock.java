@@ -38,12 +38,11 @@ public class Stock {
             String marca = objeto.getString("marca");
             String estado = objeto.getString("estado");
             String id = objeto.getString("id");
-            String quantidade = objeto.getString("quantidade");
             String validade = objeto.getString("validade");
             String descricao = objeto.getString("descricao");
 
-            System.out.println("ID: " + id + "  |  Marca: " + marca + "  |  Descrição: " + descricao
-                    + "  |  Quantidade: " + quantidade + "  |  Validade: " + validade + "  |  Estado: " + estado);
+            System.out.println("ID: " + id + "  |  Marca: " + marca + "  |  Descrição: " + descricao + "  |  Validade: "
+                    + validade + "  |  Estado: " + estado);
         }
     }
 
@@ -58,9 +57,6 @@ public class Stock {
         System.out.print("Marca: ");
         String brand = input.nextLine();
 
-        System.out.print("Quantidade: ");
-        String quantity = input.nextLine();
-
         System.out.print("Data de Validade: ");
         String validity = input.nextLine();
 
@@ -74,7 +70,6 @@ public class Stock {
 
         item.put("id", String.valueOf(id));
         item.put("marca", brand);
-        item.put("quantidade", quantity);
         item.put("validade", validity);
         item.put("descricao", description);
         item.put("estado", estado);
@@ -120,6 +115,8 @@ public class Stock {
             } else if (confirm == 2) {
                 System.out.println("Cancelado\n");
             }
+        } else {
+            System.out.println("ID não encontrado, tente novamente.\n");
         }
     }
 }
