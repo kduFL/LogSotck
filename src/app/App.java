@@ -100,7 +100,9 @@ public class App {
 
 				registerEmployee(input, manager, job);
 			} else if (job == 2) {
-				System.out.println("Assistente");
+				Auxiliary auxiliary = new Auxiliary();
+
+				registerEmployee(input, auxiliary, job);
 			} else {
 				System.out.println("\nOps... Você digitu o número errado. Digite apenas 1. Gerente ou 2. Assistente.\n");
 			}
