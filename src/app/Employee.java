@@ -1,6 +1,6 @@
 // package app;
 
-public abstract class Employee {
+public class Employee {
   private String name;
   private int position;
   private int id;

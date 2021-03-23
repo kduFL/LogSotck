@@ -96,11 +96,11 @@ public class App {
 			int job = input.nextInt();
 
 			if (job == 1) {
-				Manager manager = new Manager();
+				Employee manager = new Employee();
 
 				registerEmployee(input, manager, job);
 			} else if (job == 2) {
-				Auxiliary auxiliary = new Auxiliary();
+				Employee auxiliary = new Employee();
 
 				registerEmployee(input, auxiliary, job);
 			} else {
@@ -213,7 +213,6 @@ public class App {
 		} catch (JSONException err) {
 			System.out
 					.println("\nID não encontrado. \nVocê será redirecionado para tela inicial para realizar o cadastro.\n");
-			System.out.println(err);
 			start(input);
 		}
 	}
