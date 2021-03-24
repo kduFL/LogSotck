@@ -53,7 +53,7 @@ public class Stock {
         Random rand = new Random();
         int id = rand.nextInt(10000);
 
-        System.out.println("\nDADOS DO ITEM\n");
+        System.out.println("\nNOVO ITEM\n");
         System.out.print("Marca: ");
         String brand = input.nextLine();
 
@@ -106,7 +106,7 @@ public class Stock {
         }
         if (index != null) {
             System.out.println("Tem certeza que deseja excluir?");
-            System.out.print("1. Sim \n2. Não \n> ");
+            System.out.print("1. Sim \n2. Não \n\n> ");
             int confirm = input.nextInt();
             if (confirm == 1) {
                 jsonList.remove(index.intValue());
